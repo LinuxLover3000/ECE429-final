@@ -1,0 +1,67 @@
+
+Cadence Innovus(TM) Implementation System.
+Copyright 2021 Cadence Design Systems, Inc. All rights reserved worldwide.
+
+Version:	v21.19-s058_1, built Thu Apr 4 09:59:17 PDT 2024
+Options:	-no_gui -no_cmd -no_logv -files ../../flow/innovus.tcl 
+Date:		Tue Dec  2 21:09:56 2025
+Host:		endeavour.ece.iit.edu (x86_64 w/Linux 4.18.0-553.69.1.el8_10.x86_64) (8cores*32cpus*Intel(R) Xeon(R) Silver 4110 CPU @ 2.10GHz 11264KB)
+OS:		Rocky Linux 8.10 (Green Obsidian)
+
+License:
+		[21:09:56.098235] Configured Lic search path (21.01-s002): 5280@heinlein.ece.iit.edu:27013@sejong.ece.iit.edu:27000@heinlein.ece.iit.edu
+
+		invs	Innovus Implementation System	21.1	Denied
+		invsb	Innovus Implementation System Basic	21.1	Denied
+		fexl	First Encounter XL	21.1	Denied
+		vdixl	Virtuoso Digital Implementation XL	21.1	Denied
+		vdi	Virtuoso Digital Implementation	21.1	checkout succeeded
+		Maximum number of instances allowed (1 x 50000).
+Change the soft stacksize limit to 0.2%RAM (1027 mbytes). Set global soft_stack_size_limit to change the value.
+
+**INFO:  MMMC transition support version v31-84 
+
+<CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+<CMD> suppressMessage ENCEXT-2799
+Sourcing file "../../flow/innovus.tcl" ...
+<CMD> set init_mmmc_file ../../flow/setup-timing.tcl
+<CMD> set init_verilog cpu-post-syn.v
+<CMD> set init_lef_file {../../flow/rtk-tech.lef ../../flow/stdcells.lef}
+<CMD> set init_gnd_net gnd
+<CMD> set init_pwr_net vdd
+<CMD> init_design
+#% Begin Load MMMC data ... (date=12/02 21:10:18, mem=857.4M)
+**ERROR: (TCLCMD-995):	Can not open file 'rtk-typical.captable' for RC corner
+**ERROR: (IMPSYT-6692):	Invalid return code while executing '../../flow/innovus.tcl' was returned and script processing was stopped. Review the following error in '../../flow/innovus.tcl' then restart.
+Error info: ../../flow/innovus.tcl: 
+    while executing
+"error "$ret""
+    (procedure "::init_design::process_view_def" line 89)
+    invoked from within
+"::init_design::process_view_def $::init_mmmc_file"
+    (procedure "init_design" line 224)
+    invoked from within
+"init_design"
+    (file "../../flow/innovus.tcl" line 14)
+    invoked from within
+"::se_source_orig ../../flow/innovus.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel [concat ::se_source_orig $args]"
+    (procedure "source" line 194)
+    invoked from within
+"source ../../flow/innovus.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel #0 source ../../flow/innovus.tcl"
+    ("eval" body line 1)
+    invoked from within
+"eval {uplevel #0 source ../../flow/innovus.tcl}"
+    (in namespace inscope "::" script line 1)
+    invoked from within
+"namespace inscope :: eval "uplevel #0 source $fileName"".
+
+*** Memory Usage v#1 (Current mem = 936.594M, initial mem = 487.000M) ***
+*** Message Summary: 0 warning(s), 2 error(s)
+
+--- Ending "Innovus" (totcpu=0:00:22.1, real=0:00:57.0, mem=936.6M) ---
