@@ -1,0 +1,76 @@
+********************************************************************************
+Product   : Virtuoso(R) XStream In
+Program   : @(#)$CDS: strmin version IC23.1-64b 06/21/2023 09:20 (cpgbld16) $
+          : sub-version  IC23.1-64b.43 
+Started at: 03-Dec-2025  09:42:05
+User Name : ryonkura_429fa25
+Host Name : endeavour.ece.iit.edu
+Directory : /ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CRA
+CADENCE Design Systems, Inc.
+********************************************************************************
+Info: Cellview Rev Num:99,  Tech Rev Num:59
+
+INFO (XSTRM-289): Performing automatic layer mapping because either the layer mapping information is not provided or the XST_AUTO_LM  value is used with the '-layerMap' option.
+WARNING (XSTRM-107): Existing cells in the target library will be overwritten if the cell names in the Stream file and the target library are the same. To prevent this, set the '-writeMode' option to 'noOverwrite'.
+INFO (XSTRM-163): You have not used the '-viaMap' option. If a viaMap file, corresponding technology file or technology library exist, then use the '-viaMap' option for creating oaVia instances in the Streamed-In library. Using the '-viaMap' option improves performance and VM usage of applications using the Streamed-In design.
+
+Summary of Options:
+	library				cra
+	strmFile			/ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CRA/final.gds
+	logFile				strmIn.log
+	view				layout
+	case				Preserve
+	propSeparator			,
+
+INFO (XSTRM-80075): Via detection cannot use a stdViaDef for "cpu_VIA3" due to rounding errors. A customViaDef has been used instead. Use the -dbuPerUU option to increase the DBUperUU to enable detection of stdViaDef.
+INFO (XSTRM-80075): Via detection cannot use a stdViaDef for "cpu_VIA4" due to rounding errors. A customViaDef has been used instead. Use the -dbuPerUU option to increase the DBUperUU to enable detection of stdViaDef.
+INFO (XSTRM-80075): Via detection cannot use a stdViaDef for "cpu_VIA14" due to rounding errors. A customViaDef has been used instead. Use the -dbuPerUU option to increase the DBUperUU to enable detection of stdViaDef.
+INFO (XSTRM-80075): Via detection cannot use a stdViaDef for "cpu_VIA15" due to rounding errors. A customViaDef has been used instead. Use the -dbuPerUU option to increase the DBUperUU to enable detection of stdViaDef.
+WARNING (XSTRM-284): DbuPerUU (1000) specified in the technology database or using '-dbuPerUU' is not divisible by the value (2000) set in the GDSII file. This can cause loss in data precision during translation.
+INFO (XSTRM-220): 1. Translating STRUCTURE CLKBUF_X1 as cellView cra/CLKBUF_X1/layout.
+INFO (XSTRM-60): Creating a new purpose P63 in the technology file.
+INFO (XSTRM-62): Creating a new layer-purpose pair 'IP:P63' in the technology file.
+INFO (XSTRM-220): 2. Translating STRUCTURE NAND2_X1 as cellView cra/NAND2_X1/layout.
+INFO (XSTRM-220): 3. Translating STRUCTURE AND2_X1 as cellView cra/AND2_X1/layout.
+INFO (XSTRM-220): 4. Translating STRUCTURE CLKBUF_X2 as cellView cra/CLKBUF_X2/layout.
+INFO (XSTRM-220): 5. Translating STRUCTURE CLKBUF_X3 as cellView cra/CLKBUF_X3/layout.
+INFO (XSTRM-220): 6. Translating STRUCTURE INV_X4 as cellView cra/INV_X4/layout.
+INFO (XSTRM-220): 7. Translating STRUCTURE INV_X2 as cellView cra/INV_X2/layout.
+INFO (XSTRM-220): 8. Translating STRUCTURE INV_X1 as cellView cra/INV_X1/layout.
+INFO (XSTRM-220): 9. Translating STRUCTURE DFF_X1 as cellView cra/DFF_X1/layout.
+INFO (XSTRM-220): 10. Translating STRUCTURE XOR2_X1 as cellView cra/XOR2_X1/layout.
+INFO (XSTRM-220): 11. Translating STRUCTURE TBUF_X2 as cellView cra/TBUF_X2/layout.
+INFO (XSTRM-220): 12. Translating STRUCTURE TBUF_X1 as cellView cra/TBUF_X1/layout.
+INFO (XSTRM-220): 13. Translating STRUCTURE NOR2_X1 as cellView cra/NOR2_X1/layout.
+INFO (XSTRM-220): 14. Translating STRUCTURE OR2_X1 as cellView cra/OR2_X1/layout.
+INFO (XSTRM-220): 15. Translating STRUCTURE OR2_X2 as cellView cra/OR2_X2/layout.
+INFO (XSTRM-220): 16. Translating STRUCTURE OR2_X4 as cellView cra/OR2_X4/layout.
+INFO (XSTRM-220): 17. Translating STRUCTURE AOI22_X1 as cellView cra/AOI22_X1/layout.
+INFO (XSTRM-220): 18. Translating STRUCTURE XNOR2_X1 as cellView cra/XNOR2_X1/layout.
+INFO (XSTRM-220): 19. Translating STRUCTURE AND2_X2 as cellView cra/AND2_X2/layout.
+INFO (XSTRM-220): 20. Translating STRUCTURE NAND2_X2 as cellView cra/NAND2_X2/layout.
+INFO (XSTRM-220): 21. Translating STRUCTURE FILLCELL_X4 as cellView cra/FILLCELL_X4/layout.
+INFO (XSTRM-220): 22. Translating STRUCTURE FILLCELL_X1 as cellView cra/FILLCELL_X1/layout.
+INFO (XSTRM-220): 23. Translating STRUCTURE cpu_VIA3 as cellView cra/cpu_VIA3/layout.
+INFO (XSTRM-220): 24. Translating STRUCTURE cpu_VIA4 as cellView cra/cpu_VIA4/layout.
+INFO (XSTRM-220): 25. Translating STRUCTURE cpu_VIA14 as cellView cra/cpu_VIA14/layout.
+INFO (XSTRM-220): 26. Translating STRUCTURE cpu_VIA15 as cellView cra/cpu_VIA15/layout.
+INFO (XSTRM-220): 27. Translating STRUCTURE cpu as cellView cra/cpu/layout.
+
+Summary of Objects Translated:
+	Instances:                              29781
+	CustomVias:                             72
+	StandardVias:                           95299
+	CdsGenVias:                             0
+	Arrays:                                 0
+	Polygons:                               169
+	Paths:                                  109914
+	PathSegs:                               0
+	Rectangles:                             935
+	Text:                                   289
+	Node:                                   0
+	Line:                                   0
+	Cells:                                  27
+
+Elapsed Time: 0.9s   User Time: 1.0s   CPU Time: 0.1s   Peak VM: 18304KB  CPUs Used: 2
+INFO (XSTRM-234): Translation completed. '0' error(s) and '2' warning(s) found.

@@ -1,0 +1,4 @@
+DEFINE NangateOpenCellLibrary /apps/freepdk45nm/NangateOpenCellLibrary
+#Removed by ddDeleteObj: DEFINE cra /ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CRA/cra
+#Removed by ddDeleteObj: DEFINE cra /ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CRA/cra
+DEFINE csa /ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CSA/csa

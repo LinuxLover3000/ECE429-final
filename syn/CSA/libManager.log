@@ -1,0 +1,108 @@
+\o Program:		@(#)$CDS: libManager version 6.1.8 - CAT38.23 06/08/2023 01:07 (sjfdcl1184) $
+\o Sub version:		sub-version  p200 
+\o Arguments:		-mpssession virtuoso3646295 -mpshost endeavour.ece.iit.edu -ADVM 
+\o Working Directory:	endeavour.ece.iit.edu:/ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CSA
+\o 64-bit offsets
+\o Qt version: 		5.15.9
+\o Log file is "/ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CSA/libManager.log".
+\o Opening libManager window.
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(cdsLibManager list(1259 31 661 602))
+\o changeWorkingDir("/ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CSA") unnecessary.
+\o ddSetForcedLib("") unnecessary.
+\o Session hidden cells enabled.
+\o MPS service: map window
+\o Library Manager customization server connected.
+\a cdsLibManager->libListBox->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libLineEdit->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libLineEdit->value = "NangateOpenCellLibrary"
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->copySimpleButton->value = t
+\a basicCopyForm->CopyFromLibrary->value = "NangateOpenCellLibrary"
+\a basicCopyForm->CopyToLibrary->value = "NangateOpenCellLibrary"
+\a nrSetWindowVisibility(basicCopyForm "show")
+\a nrSetCurrentWindow(basicCopyForm)
+\a nrResizeWindow(basicCopyForm list(1428 171 303 316))
+\a basicCopyForm->CopyToLibrary->value = "csa"
+\a basicCopyForm->OK->value = t
+\o Beginning simple copy to library "csa".
+\o Processing files to be copied...
+\a nrSetWindowVisibility(workingDialogForm "show")
+\a nrSetCurrentWindow(workingDialogForm)
+\a NewLibShell->newLibNameText->value = "csa"
+\o INFO (CLM-130): Your operation specified a new destination library.\n\nThis dialog requires you to specify the location where \nthe new library's directory will be created when OK'd.\n\nYou will not create a new library if this dialog is cancelled.
+\a nrSetWindowVisibility(NewLibShell "show")
+\a nrResizeWindow(workingDialogForm list(1443 226 273 133))
+\a nrSetCurrentWindow(NewLibShell)
+\a nrSetCurrentWindow(NewLibShell->subDialog)
+\a nrResizeWindow(workingDialogForm list(1443 189 273 133))
+\a nrResizeWindow(NewLibShell list(1336 27 507 692))
+\a nrResizeWindow(NewLibShell->subDialog list(9 9 441 256))
+\a NewLibShell->newLibOKButton->value = t
+\o Created new library "csa" at /ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CSA/csa.
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libLineEdit->value = "NangateOpenCellLibrary"
+\a nrSetCurrentWindow(workingDialogForm)
+\a nrResizeWindow(workingDialogForm list(1448 263 262 133))
+\a nrResizeWindow(NewLibShell list(1336 -10 507 692))
+\a nrResizeWindow(basicCopyForm list(1428 97 303 316))
+\o Batching session updates...
+\o Copy succeeded.
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libLineEdit->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "NangateOpenCellLibrary"
+\a cdsLibManager->libLineEdit->value = "NangateOpenCellLibrary"
+\a nrSetCurrentWindow(cdsLibManager)
+\a nrResizeWindow(workingDialogForm list(1448 226 262 133))
+\o Batching session updates...
+\a cdsLibManager->libListBox->value = "csa"
+\a cdsLibManager->libLineEdit->value = "csa"
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "csa"
+\a cdsLibManager->libLineEdit->value = "csa"
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "csa"
+\a cdsLibManager->libLineEdit->value = "csa"
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->cellListBox->value = "cpu"
+\a cdsLibManager->cellLineEdit->value = "cpu"
+\a cdsLibManager->viewListBox->value = "layout"
+\a cdsLibManager->viewLineEdit->value = "layout"
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = "layout"
+\a cdsLibManager->viewLineEdit->value = "layout"
+\o MPS request: edit design
+\a nrListItemAction(cdsLibManager->gdmXTView 0 0)
+\a nrSetCurrentWindow(cdsLibManager)
+\a cdsLibManager->libListBox->value = nil
+\a cdsLibManager->libLineEdit->value = ""
+\a cdsLibManager->cellListBox->value = nil
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->cellLineEdit->value = ""
+\a cdsLibManager->libListBox->value = "csa"
+\a cdsLibManager->libLineEdit->value = "csa"
+\a cdsLibManager->cellListBox->value = "cpu"
+\a cdsLibManager->cellLineEdit->value = "cpu"
+\a cdsLibManager->viewListBox->value = "layout"
+\a cdsLibManager->viewLineEdit->value = "layout"
+\a cdsLibManager->viewLineEdit->value = ""
+\a cdsLibManager->viewListBox->value = nil
+\a cdsLibManager->viewListBox->value = "layout"
+\a cdsLibManager->viewLineEdit->value = "layout"
+\o MPS service: shutdown
+\o libManager is exiting.
+\a exit(0)
