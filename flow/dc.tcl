@@ -1,17 +1,17 @@
 define_design_lib WORK -path ./WORK
 
-set_app_var target_library "./stdcells.db"
-set_app_var link_library "* ./stdcells.db"
+set_app_var target_library "../../flow/stdcells.db"
+set_app_var link_library "* ../../flow/stdcells.db"
 
 ########################################################
 # 1. change the verilog file that you want to synthesize
-set my_verilog_files [list accu.v]
+set my_verilog_files [list ../../src/cpu_CSeA.v]
 
 # 2. change the toplevel module as needed
-set my_toplevel accu
+set my_toplevel cpu
 
 # 3. change the clock frequency in Mega Hertz 
-set my_clk_freq_MHz 1000
+set my_clk_freq_MHz 30
 #######################################################
 set my_clock_pin clk
 set my_input_delay_ns 0.1
