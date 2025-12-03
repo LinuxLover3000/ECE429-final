@@ -1,9 +1,9 @@
 create_rc_corner -name typical \
-    -cap_table "rtk-typical.captable" \
+    -cap_table "../../flow/rtk-typical.captable" \
     -T 25
 
  create_library_set -name libs_typical \
-    -timing [list "stdcells.lib"]
+    -timing [list "../../flow/stdcells.lib"]
 
  create_delay_corner -name delay_default \
     -early_library_set libs_typical \
@@ -14,7 +14,7 @@ create_rc_corner -name typical \
 # 1. change the sdc file name 
 # ###############################################
  create_constraint_mode -name constraints_default \
-    -sdc_files [list accu-post-syn.sdc]
+    -sdc_files [list cpu-post-syn.sdc]
 
  create_analysis_view -name analysis_default \
     -constraint_mode constraints_default \

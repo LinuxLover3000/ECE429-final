@@ -1,13 +1,13 @@
-set init_mmmc_file "setup-timing.tcl"
+set init_mmmc_file "../../flow/setup-timing.tcl"
 
 #############################################
 # 1. change the synthesized verilog file name
-set init_verilog "accu-post-syn.v"
+set init_verilog "cpu-post-syn.v"
 # 2. change the top cell name 
-set init_top_cel "accu"
+set init_top_cel "cpu"
 #############################################
 
-set init_lef_file "rtk-tech.lef stdcells.lef"
+set init_lef_file "../../flow/rtk-tech.lef ../../flow/stdcells.lef"
 set init_gnd_net "gnd"
 set init_pwr_net "vdd"
 
@@ -54,8 +54,8 @@ verify_drc
 saveNetlist final.v
 
 streamOut final.gds \
-            -merge "stdcells.gds" \
-            -mapFile "rtk-stream-out.map"
+            -merge "../../flow/stdcells.gds" \
+            -mapFile "../../flow/rtk-stream-out.map"
 
 puts "**************************************"
 puts "* Innovus script finished            *"
