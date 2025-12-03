@@ -1,0 +1,15 @@
+sim/.cdsinit
+sim/.runset.calibre.drc
+sim/.runset.calibre.lfd
+sim/.runset.calibre.lvs
+sim/.runset.calibre.pex
+sim/DVEfiles/
+sim/cds.lib
+sim/csrc/
+sim/lib.defs
+sim/opendatabase.log
+sim/simv
+sim/simv.daidir/
+sim/stim_proj.out
+sim/*.vpd
+sim/ucli.key
