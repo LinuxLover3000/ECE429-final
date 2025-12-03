@@ -1,3 +1,47 @@
+//one bit comparator
+module one_bit_comp(a, b, f1, f0);
+  input a, b;
+  output f1, f0;
+
+  if (a > b) then {f1, f0} = 2'b01
+  if (a < b) then {f1, f0} = 2'b00
+  if (a == b) then {f1, f0} = 2'b10
+endmodule
+
+//mux to select the f1 f0 outputs
+module mux_4to2(hi_f1, hi_f0, lo_f1, lo_f0, f1, f0);
+  input hi_f1, hi_f0, lo_f1, lo_f0;
+  output f1, f0;
+
+  //use hi_f1 to select the correct outputs
+  
+endmodule
+
+//32-bit tree comparator
+module tree_comp(A, B, f1, f0);
+  input [31:0] A, B;
+  output f1, f0;
+
+  wire [31:0] f1_L5, f0_L5;
+  wire [15:0] f1_L4, f0_L4;
+  wire [ 7:0] f1_L3, f0_L3;
+  wire [ 3:0] f1_L2, f0_L2;
+  wire [ 1:0] f1_L1, f0_L1;
+
+  //Level 5: 32 one_bit_comp
+
+  //Level 4: 16 mux_4to2
+
+  //Level 3:  8 mux_4to2
+
+  //Level 2:  4 mux_4to2
+
+  //Level 1:  2 mux_4to2
+
+  //Level 0:  1 mux_4to2
+
+endmodule
+
 // DECODER (5 to 32 line)
 module decoder(in,out);
 // I/O port declarations
