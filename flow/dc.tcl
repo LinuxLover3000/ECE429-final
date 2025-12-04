@@ -5,7 +5,7 @@ set_app_var link_library "* ../../flow/stdcells.db"
 
 ########################################################
 # 1. change the verilog file that you want to synthesize
-set my_verilog_files [list ../../src/cpu_CSeA.v]
+set my_verilog_files [list ../../src/cpu_comp.v]
 
 # 2. change the toplevel module as needed
 set my_toplevel cpu
