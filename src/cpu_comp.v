@@ -1,3 +1,69 @@
+//one bit comparator
+module one_bit_comp(a, b, f1, f0);
+  input a, b;
+  output f1, f0;
+
+  if (a > b) then {f1, f0} = 2'b01
+  if (a < b) then {f1, f0} = 2'b00
+  if (a == b) then {f1, f0} = 2'b10
+endmodule
+
+//mux to select the f1 f0 outputs
+module mux_4to2(hi_f1, hi_f0, lo_f1, lo_f0, f1, f0);
+  input hi_f1, hi_f0, lo_f1, lo_f0;
+  output f1, f0;
+
+  //use hi_f1 to select the correct outputs
+  if (hi_f1 == 1) then {f1, f0} = {lo_f1, lo_f0}
+  if (hi_f0 == 0) then {f1, f0} = {hi_f1, hi_f0} //comparison result is determined
+endmodule
+
+//32-bit tree comparator
+module tree_comp(A, B, f1, f0);
+  input [31:0] A, B;
+  output f1, f0;
+
+  wire [31:0] f1_L5, f0_L5;
+  wire [15:0] f1_L4, f0_L4;
+  wire [ 7:0] f1_L3, f0_L3;
+  wire [ 3:0] f1_L2, f0_L2;
+  wire [ 1:0] f1_L1, f0_L1;
+
+  //Level 5: 32 one_bit_comp
+  generate
+    for (i = 0; i < 32; i = i+1) begin
+      one_bit_comp comp(A[i], B[i], f1_L5[i], f0_L5[i]);
+    end
+  endgenerate
+  //Level 4: 16 mux_4to2
+  generate
+    for (i = 0; i < 16; i = i+1) begin
+      mux_4to2 mux(f1_L5[2*i + 1], f0_L5[2*i + 1], f1_L5[2*i], f0_L5[2*i], f1_L4[i], f0_L4[i]);
+    end
+  endgenerate
+  //Level 3:  8 mux_4to2
+  generate
+    for (i = 0; i < 8; i = i+1) begin
+      mux_4to2 mux(f1_L4[2*i + 1], f0_L4[2*i + 1], f1_L4[2*i], f0_L4[2*i], f1_L3[i], f0_L3[i]);
+    end
+  endgenerate
+  //Level 2:  4 mux_4to2
+  generate
+    for (i = 0; i < 4; i = i+1) begin
+      mux_4to2 mux(f1_L3[2*i + 1], f0_L3[2*i + 1], f1_L3[2*i], f0_L3[2*i], f1_L2[i], f0_L2[i]);
+    end
+  endgenerate
+  //Level 1:  2 mux_4to2
+  generate
+    for (i = 0; i < 2; i = i+1) begin
+      mux_4to2 mux(f1_L2[2*i + 1], f0_L2[2*i + 1], f1_L2[2*i], f0_L2[2*i], f1_L1[i], f0_L1[i]);
+    end
+  endgenerate
+  //Level 0:  1 mux_4to2
+  mux_4to2 mux(f1_L1[1], f0_L1[1], f1_L1[0], f0_L1[0], f1, f0);
+
+endmodule
+
 // DECODER (5 to 32 line)
 module decoder(in,out);
 // I/O port declarations
@@ -125,17 +191,6 @@ output [1:0] qout;
 dreg m0(d[0], clk, qout[0]);
 dreg m1(d[1], clk, qout[1]);
 
-endmodule
-
-//3-bit D-register
-module dreg_3bit(d, clk, qout);
-input [2:0] d;
-input clk;
-output [2:0] qout;
-
-dreg m0(d[0], clk, qout[0]);
-dreg m1(d[1], clk, qout[1]);
-dreg m2(d[2], clk, qout[2]);
 endmodule
 
 // 5-bit D-register
@@ -1844,30 +1899,28 @@ module alu(aluout,a,b,opsel,outsel,clk,over);
 //Input variables
 	input [31:0] a,b;
 	input [1:0] opsel;
-	input [2:0] outsel;
+	input [2:0] outsel; //Add a bit to outsel to support 5-to-1 mux
 	input clk;
 	reg [31:0] aluout;
 //Wire
 	
 	wire [31:0] OUT_LOGIC, OUT_ADD_SUB, OUT_MUL_MSB, OUT_MUL_LSB, OUT_COMP;
 	wire out_c;
-	wire f1, f0;
 	
-//Calling 32 bit adder, logic, and multiplication and comparator module
+//Calling 32 bit adder, logic, multiplication, and comparator module
 	logic_fn l1(OUT_LOGIC,a,b,opsel);
 	as32b l2(OUT_ADD_SUB, out_c, over, a, b, opsel);
 	mul l3(OUT_MUL_MSB,OUT_MUL_LSB,a,b,clk);
-	tree_comp l4(a,b,f1,f0);
-	assign OUT_COMP = {30'b0, f1, f0};
-	
+	tree_comp l4(a, b, OUT_COMP[1], OUT_COMP[0]);
+
 //Case loop
 	always @(OUT_LOGIC or OUT_ADD_SUB or OUT_MUL_MSB or OUT_MUL_LSB or OUT_COMP or outsel[2] or outsel[1] or outsel[0])
 	case ({outsel[2],outsel[1],outsel[0]})
-	3'b000 : aluout = OUT_LOGIC;
-	3'b001 : aluout = OUT_ADD_SUB;
-	3'b010 : aluout = OUT_MUL_LSB;
-	3'b011 : aluout = OUT_MUL_MSB;
-	3'b100 : aluout = OUT_COMP;
+	2'b000 : aluout = OUT_LOGIC;
+	2'b001 : aluout = OUT_ADD_SUB;
+	2'b010 : aluout = OUT_MUL_LSB;
+	2'b011 : aluout = OUT_MUL_MSB;
+	2'b100 : aluout = OUT_COMP; //New comparator outsel = 100
 	default : $display("Please check Select Lines!");
 	endcase
         endmodule
@@ -1912,77 +1965,17 @@ dreg_5bit bd(addressB, clk, addrB);
 module ALUoperation(opsel, outsel, oen, clk, OPSEL, OUTSEL, OEN);
 
 input clk,oen;
-input [1:0] opsel;
-input [2:0] outsel;
-output [1:0] OPSEL;
-output [2:0] OUTSEL;
+input [1:0] opsel, outsel;
+output [1:0] OPSEL, OUTSEL;
 output OEN;
+//reg [1:0] OPSEL, OUTSEL;
 
 dreg_2bit ops(opsel, clk, OPSEL);
-dreg_3bit outs(outsel, clk, OUTSEL);
+dreg_2bit outs(outsel, clk, OUTSEL);
 dreg oe(oen, clk, OEN);
 
 endmodule
 
-////////////////////////////////////////////////////////////////////////////////
-//									      //
-// Students should fill out the following modules to add Comparator in the ALU//
-//									      //
-// Please check the "//write your code here" part in the source               //
-//									      //
-////////////////////////////////////////////////////////////////////////////////
-
-//one bit comparator
-module one_bit_comp(a, b, f1, f0);
-input a, b;
-output f1, f0;
-
-//if (a > b) then {f1, f0} = 2'b01
-//if (a < b) then {f1, f0} = 2'b00
-//if (a == b) then {f1, f0} = 2'b10
-
-//write your code here
-
-endmodule
-
-//mux to select the f1 f0 outputs
-module mux_4to2(hi_f1, hi_f0, lo_f1, lo_f0, f1, f0);
-
-input hi_f1, hi_f0, lo_f1, lo_f0;
-output f1, f0;
-
-//use hi_f1 to select the correct outputs
-
-//write your code here
-
-endmodule
-
-//32-bit tree comparator
-module tree_comp(A, B, f1, f0);
-input [31 : 0] A, B;
-output f1, f0;
-
-wire [31 : 0] f1_L5, f0_L5;
-wire [15 : 0] f1_L4, f0_L4;
-wire [7 : 0] f1_L3, f0_L3;
-wire [3 : 0] f1_L2, f0_L2;
-wire [1 : 0] f1_L1, f0_L1;
-
-//write your code here
-
-//Level 5: 32 one_bit_comp go here
-
-//Level 4: 16 mux_4to2 go here
-
-//Level 3: 8 mux_4to2 go here
-
-//Level 2: 4 mux_4to2 go here
-
-//Level 1: 2 mux_4to2 go here
-
-//Level 0: 1 mux_4to2 goes here
-
-endmodule
 
 
 //////cpu//////////////////
@@ -1991,14 +1984,13 @@ module cpu(addressA, addressB, dataIn, asel,bsel, clk, opsel, outsel, oen, outPu
 input [31:0] dataIn;
 input [4:0] addressA, addressB;
 input [1:0] opsel;
-input [2:0] outsel;
+input [ outsel;
 input oen, clk, asel, bsel;
 
 output [31:0] outPut;
 output over;
 
-wire [1:0] OPSEL;
-wire [2:0] OUTSEL; 
+wire [1:0] OPSEL, OUTSEL; 
 wire  OEN;
 wire [4:0] backB;
 wire [31:0] aluout,A,B,outPut;
