@@ -1,0 +1,6 @@
+/apps/synopsys/fm/W-2024.09-SP5/linux64/fm/bin/fm_shell_exec -r /apps/synopsys/fm/W-2024.09-SP5 -gui 
+
+Version    = W-2024.09-SP5
+Build      = W-2024.09-SP5-formality_w2024.09_sp5_rel-9717777
+Build date = Apr  9, 2025
+Run date   = Wed Dec  3 21:39:05 2025 CST
