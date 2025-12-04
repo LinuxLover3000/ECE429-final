@@ -1,0 +1,2 @@
+DEFINE NangateOpenCellLibrary /apps/freepdk45nm/NangateOpenCellLibrary
+DEFINE cla_with_comp /ext/student-home/ryonkura_429fa25/ece429/ECE429-final/syn/CLA_with_comp/cla_with_comp
