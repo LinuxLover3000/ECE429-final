@@ -1935,26 +1935,40 @@ endmodule
 //one bit comparator
 module one_bit_comp(a, b, f1, f0);
 input a, b;
-output f1, f0;
+output reg f1, f0;
 
-if (a > b) then {f1, f0} = 2'b01
-if (a < b) then {f1, f0} = 2'b00
-if (a == b) then {f1, f0} = 2'b10
+//if (a > b) then {f1, f0} = 2'b01
+//if (a < b) then {f1, f0} = 2'b00
+//if (a == b) then {f1, f0} = 2'b10
 
 //write your code here
-
+always @(*) begin
+  if (a > b)
+    {f1, f0} = 2'b01;
+  if (a < b)
+    {f1, f0} = 2'b00;
+  if (a == b)
+    {f1, f0} = 2'b10;
+end
 endmodule
 
 //mux to select the f1 f0 outputs
 module mux_4to2(hi_f1, hi_f0, lo_f1, lo_f0, f1, f0);
 
 input hi_f1, hi_f0, lo_f1, lo_f0;
-output f1, f0;
+output reg f1, f0;
 
 //use hi_f1 to select the correct outputs
-if (hi_f1 == 1) then {f1, f0} = {lo_f1, lo_f0}
-if (hi_f0 == 0) then {f1, f0} = {hi_f1, hi_f0} //comparison result is determined
+always @(*) begin
+  if (hi_f1 == 1) begin
+    {f1, f0} = {lo_f1, lo_f0};
+  end
+  //if comparison result is determined
+  if (hi_f0 == 0) begin
+    {f1, f0} = {hi_f1, hi_f0};
+  end 
 //write your code here
+end
 
 endmodule
 
@@ -1972,37 +1986,38 @@ wire [1 : 0] f1_L1, f0_L1;
 //write your code here
 
 //Level 5: 32 one_bit_comp go here
+genvar i;
 generate
-  for (i = 0; i < 32; i = i+1) begin
+  for (i = 0; i < 32; i = i+1) begin : gen_lvl_5
     one_bit_comp comp(A[i], B[i], f1_L5[i], f0_L5[i]);
   end
 endgenerate
 //Level 4: 16 mux_4to2 go here
 generate
-  for (i = 0; i < 16; i = i+1) begin
+  for (i = 0; i < 16; i = i+1) begin : gen_lvl_4
     mux_4to2 mux(f1_L5[2*i + 1], f0_L5[2*i + 1], f1_L5[2*i], f0_L5[2*i], f1_L4[i], f0_L4[i]);
   end
 endgenerate
 //Level 3: 8 mux_4to2 go here
 generate
-  for (i = 0; i < 8; i = i+1) begin
+  for (i = 0; i < 8; i = i+1) begin : gen_lvl_3
     mux_4to2 mux(f1_L4[2*i + 1], f0_L4[2*i + 1], f1_L4[2*i], f0_L4[2*i], f1_L3[i], f0_L3[i]);
   end
 endgenerate
 //Level 2: 4 mux_4to2 go here
 generate
-  for (i = 0; i < 4; i = i+1) begin
+  for (i = 0; i < 4; i = i+1) begin : gen_lvl_2
     mux_4to2 mux(f1_L3[2*i + 1], f0_L3[2*i + 1], f1_L3[2*i], f0_L3[2*i], f1_L2[i], f0_L2[i]);
   end
 endgenerate
 //Level 1: 2 mux_4to2 go here
 generate
-  for (i = 0; i < 2; i = i+1) begin
+  for (i = 0; i < 2; i = i+1) begin : gen_lvl_1
     mux_4to2 mux(f1_L2[2*i + 1], f0_L2[2*i + 1], f1_L2[2*i], f0_L2[2*i], f1_L1[i], f0_L1[i]);
   end
 endgenerate
 //Level 0: 1 mux_4to2 goes here
-
+mux_4to2 mux(f1_L1[1], f0_L1[1], f1_L1[0], f0_L1[0], f1, f0);
 endmodule
 
 
