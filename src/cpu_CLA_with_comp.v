@@ -1898,26 +1898,29 @@ module alu(aluout,a,b,opsel,outsel,clk,over);
 	
 //Input variables
 	input [31:0] a,b;
-	input [1:0] opsel,outsel;
+	input [1:0] opsel;
+	input [2:0] outsel; //Add a bit to outsel to support 5-to-1 mux
 	input clk;
 	reg [31:0] aluout;
 //Wire
 	
-	wire [31:0] OUT_LOGIC, OUT_ADD_SUB, OUT_MUL_MSB, OUT_MUL_LSB;
+	wire [31:0] OUT_LOGIC, OUT_ADD_SUB, OUT_MUL_MSB, OUT_MUL_LSB, OUT_COMP;
 	wire out_c;
 	
-//Calling 32 bit adder, logic, and multiplication module
+//Calling 32 bit adder, logic, multiplication, and comparator module
 	logic_fn l1(OUT_LOGIC,a,b,opsel);
 	as32b l2(OUT_ADD_SUB, out_c, over, a, b, opsel);
 	mul l3(OUT_MUL_MSB,OUT_MUL_LSB,a,b,clk);
+	tree_comp l4(a, b, OUT_COMP[1], OUT_COMP[0]);
 
 //Case loop
-	always @(OUT_LOGIC or OUT_ADD_SUB or OUT_MUL_MSB or OUT_MUL_LSB or outsel[1] or outsel[0])
-	case ({outsel[1],outsel[0]})
-	2'b00 : aluout = OUT_LOGIC;
-	2'b01 : aluout = OUT_ADD_SUB;
-	2'b10 : aluout = OUT_MUL_LSB;
-	2'b11 : aluout = OUT_MUL_MSB;
+	always @(OUT_LOGIC or OUT_ADD_SUB or OUT_MUL_MSB or OUT_MUL_LSB or OUT_COMP or outsel[2] or outsel[1] or outsel[0])
+	case ({outsel[2],outsel[1],outsel[0]})
+	2'b000 : aluout = OUT_LOGIC;
+	2'b001 : aluout = OUT_ADD_SUB;
+	2'b010 : aluout = OUT_MUL_LSB;
+	2'b011 : aluout = OUT_MUL_MSB;
+	2'b100 : aluout = OUT_COMP; //New comparator outsel = 100
 	default : $display("Please check Select Lines!");
 	endcase
         endmodule
@@ -1980,7 +1983,8 @@ endmodule
 module cpu(addressA, addressB, dataIn, asel,bsel, clk, opsel, outsel, oen, outPut, over);
 input [31:0] dataIn;
 input [4:0] addressA, addressB;
-input [1:0] opsel, outsel;
+input [1:0] opsel;
+input [ outsel;
 input oen, clk, asel, bsel;
 
 output [31:0] outPut;
